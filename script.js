@@ -17,12 +17,14 @@ for (let i = 0; i < 3; i++) {
   boxItem[bottomArr[i]].style.borderBottom = "none";
 }
 
-let count = 1;
+let playAgainButton=document.getElementById("playAgainButton")
 
+let count = 1;
+let boxFilled=0
+let playerChoosen=false
+let choosenPlayer=0
 let inputForX = [];
 let inputForY = [];
-let sumForX = 0;
-let sumForY = 0;
 
 let arr1 = [0, 1, 2];
 let arr2 = [0, 4, 8];
@@ -46,60 +48,93 @@ let objArr = {
 
 let temp = 0;
 let getObj = 1;
-let win=0
+let win = 0;
+let player=document.getElementsByClassName("player")
+let playerButton=document.getElementById("playerButton")
+let matchWon=document.getElementById("matchWon")
 
-
+function choosePlayer(str){
+  if(str=="X" && playerChoosen==false){
+    player[0].style.backgroundColor="rgb(240, 18, 18)"
+    player[1].style.backgroundColor="rgb(177, 177, 177)"
+    count=1
+    playerChoosen=true
+    win=0
+  }
+  if(str=="O" && playerChoosen==false){
+    player[1].style.backgroundColor="rgb(240, 18, 18)"
+    player[0].style.backgroundColor="rgb(177, 177, 177)"
+    count=0
+    playerChoosen=true
+    win=0
+  }
+}
 // This function is for X
-function checkAllArrayForX(arr) {
+function checkAllArrayForX(array2) {
   temp = 0;
-  console.log("sended arr is", arr);
+  console.log("sended arr is", array2);
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < inputForX.length; j++) {
-      if (arr[i] == inputForX[j]) {
+      if (array2[i] == inputForX[j]) {
         temp++;
         break;
       }
+    }
+    if (temp == 3) {
+      break;
     }
   }
   console.log("temp", temp);
 }
 
 // This function is for O
-function checkAllArrayForO(arr) {
-    temp = 0;
-    console.log("sended arr is", arr);
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < inputForY.length; j++) {
-        if (arr[i] == inputForY[j]) {
-          temp++;
-          break;
-        }
+function checkAllArrayForO(array1) {
+  temp = 0;
+  console.log("sended arr is", array1);
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < inputForY.length; j++) {
+      if (array1[i] == inputForY[j]) {
+        temp++;
+        break;
       }
     }
-    console.log("temp", temp);
+    if (temp == 3) {
+      break;
+    }
   }
+  console.log("temp", temp);
+}
 
 function enterTicTacToe(num) {
-
-  if(win==0){
-    if (count == 1) {
-        boxItem[num].innerText = "X";
-        boxItem[num].style.color = "#55b4fa";
-        count = 0;
-        inputForX.push(num);
-        sumForX = sumForX + num;
-        console.log(inputForX);
-      } else {
-        boxItem[num].innerText = "O";
-        boxItem[num].style.color="#f81b81"
-        count = 1;
-        inputForY.push(num);
-        sumForY = sumForY + num;
-        console.log(inputForY);
-      }
+  if(playerChoosen==false){
+    alert("Please, choose the player first")
+    win=1
   }
-
-  if (inputForX.length >= 3) {
+  if (win == 0) {
+    if (count == 1 && boxItem[num].innerText == "") {
+      boxItem[num].innerText = "X";
+      boxItem[num].style.color = "#55b4fa";
+      inputForX.push(num);
+      console.log(inputForX);
+      count=0
+      boxFilled++
+    }
+    else{
+      if (count == 0 && boxItem[num].innerText == "") {
+        boxItem[num].innerText = "O";
+        boxItem[num].style.color = "#f81b81";
+        inputForY.push(num);
+        console.log(inputForY);
+        count=1
+        boxFilled++
+      }
+    }
+  }
+  if(boxFilled==9){
+    playAgainButton.style.display="block"
+    boxFilled=0
+  }
+  if (inputForX.length >= 3 && win ==0) {
     for (let i = 1; i < 9; i++) {
       console.log("value of get obj", getObj);
       checkAllArrayForX(objArr[getObj]);
@@ -115,35 +150,64 @@ function enterTicTacToe(num) {
         console.log("index of f1 array", newArr[i]);
         boxItem[newArr[i]].style.backgroundColor = "rgb(61, 185, 61)";
       }
-      win=1
-    }
-    else{
-        getObj=1
-        temp=0
+      playAgainButton.style.display="block"
+      player[0].style.backgroundColor="#1abc9c"
+      player[1].style.backgroundColor="#1abc9c"
+      win = 1;
+      matchWon.innerText="X won the match"
+      //playerChoosen=false
+      boxFilled=0
+    } else {
+      getObj = 1;
+      temp = 0;
     }
   }
 
-  if (inputForY.length >= 3) {
+  if (inputForY.length >= 3 && win ==0) {
     for (let i = 1; i < 9; i++) {
-        console.log("value of get obj", getObj);
-        checkAllArrayForO(objArr[getObj]);
-        if (temp == 3) {
-          temp = 0;
-          break;
-        }
-        getObj++;
+      console.log("value of get obj", getObj);
+      checkAllArrayForO(objArr[getObj]);
+      if (temp == 3) {
+        temp = 0;
+        break;
       }
-      if (getObj < 9) {
-        let newArr = objArr[getObj];
-        for (let i = 0; i < 3; i++) {
-          console.log("index of f1 array", newArr[i]);
-          boxItem[newArr[i]].style.backgroundColor = "rgb(61, 185, 61)";
-        }
-        win=1
+      getObj++;
+    }
+    if (getObj < 9) {
+      let newArr = objArr[getObj];
+      for (let i = 0; i < 3; i++) {
+        console.log("index of f1 array", newArr[i]);
+        boxItem[newArr[i]].style.backgroundColor = "rgb(61, 185, 61)";
       }
-      else{
-          getObj=1
-          temp=0
-      }
+      playAgainButton.style.display="block"
+      player[0].style.backgroundColor="#1abc9c"
+      player[1].style.backgroundColor="#1abc9c"
+      win = 1;
+      //playerChoosen=false
+      matchWon.innerText="O won the match"
+      boxFilled=0
+    } else {
+      getObj = 1;
+      temp = 0;
+    }
   }
+}
+
+function startAgain(n) {
+  for (let i = 0; i < n; i++) {
+    boxItem[i].innerText = "";
+    boxItem[i].style.backgroundColor = "#fff";
+  }
+  win = 0;
+  count = 1;
+  temp = 0;
+  getObj = 1;
+  inputForX = [];
+  inputForY = [];
+  console.log(win, count, temp, getObj);
+  matchWon.innerText=""
+  player[0].style.backgroundColor="#1abc9c"
+  player[1].style.backgroundColor="#1abc9c"
+  playAgainButton.style.display="none"
+  playerChoosen=false
 }

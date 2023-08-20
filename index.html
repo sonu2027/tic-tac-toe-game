@@ -1,30 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic Tac Toe game</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
     <div id="boxContainer">
-        <div class="box">
-            <div onclick="enterTicTacToe(0)" class="boxItem"></div>
-            <div onclick="enterTicTacToe(1)" class="boxItem"></div>
-            <div onclick="enterTicTacToe(2)" class="boxItem"></div>
+      <div id="player">
+        <p>Choose player</p>
+        <div id="playerButton">
+          <button class="player" onclick="choosePlayer('X')">X</button>
+          <button class="player" onclick="choosePlayer('O')">O</button>
         </div>
-        <div class="box">
-            <div onclick="enterTicTacToe(3)" class="boxItem"></div>
-            <div onclick="enterTicTacToe(4)" class="boxItem"></div>
-            <div onclick="enterTicTacToe(5)" class="boxItem"></div>
-        </div>
-        <div class="box">
-            <div onclick="enterTicTacToe(6)" class="boxItem"></div>
-            <div onclick="enterTicTacToe(7)" class="boxItem"></div>
-            <div onclick="enterTicTacToe(8)" class="boxItem"></div>
-        </div>
+      </div>
+      <div class="box">
+        <div onclick="enterTicTacToe(0)" class="boxItem"></div>
+        <div onclick="enterTicTacToe(1)" class="boxItem"></div>
+        <div onclick="enterTicTacToe(2)" class="boxItem"></div>
+      </div>
+      <div class="box">
+        <div onclick="enterTicTacToe(3)" class="boxItem"></div>
+        <div onclick="enterTicTacToe(4)" class="boxItem"></div>
+        <div onclick="enterTicTacToe(5)" class="boxItem"></div>
+      </div>
+      <div class="box">
+        <div onclick="enterTicTacToe(6)" class="boxItem"></div>
+        <div onclick="enterTicTacToe(7)" class="boxItem"></div>
+        <div onclick="enterTicTacToe(8)" class="boxItem"></div>
+      </div>
+
+      <p style="margin-top: 2rem; color:rgb(29, 135, 135); font-size:1.5rem;" id="matchWon"></p>
+
+      <div id="startAgain">
+        <button id="playAgainButton" onclick="startAgain(9)">Play again</button>
+      </div>
+
+      <div class="container">
+        <footer>
+          <span style="font-size: 2rem">Developed by &nbsp;</span>
+          <a href="https://www.linkedin.com/in/sonu-mondal-2380981a7/"
+            ><img style="width: 2rem" src="linkedinLogo.png" alt=""
+          /></a>
+        </footer>
+      </div>
+      
     </div>
 
+   
+
+
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>
