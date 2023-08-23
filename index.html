@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <nav>
+      <span onclick="reset(9)" class="bt" id="reset"> Reset </span>
+      <span class="bt opt selected"> One player </span>
+      <span  class="bt opt"> Two player </span>
+      <span id="playerX"> &nbsp; X: 0 &nbsp; </span>
+      <span id="playerO"> &nbsp; O: 0 &nbsp; </span>
+    </nav>
     <div id="boxContainer">
       <div id="player">
         <p>Choose player</p>
@@ -16,25 +23,25 @@
         </div>
       </div>
       <div class="box">
-        <div onclick="enterTicTacToe(0)" class="boxItem"></div>
-        <div onclick="enterTicTacToe(1)" class="boxItem"></div>
-        <div onclick="enterTicTacToe(2)" class="boxItem"></div>
+        <div onclick="singlePlayer(0); twoPlayer(0)" class="boxItem"></div>
+        <div onclick="singlePlayer(1); twoPlayer(1)" class="boxItem"></div>
+        <div onclick="singlePlayer(2); twoPlayer(2)"  class="boxItem"></div>
       </div>
       <div class="box">
-        <div onclick="enterTicTacToe(3)" class="boxItem"></div>
-        <div onclick="enterTicTacToe(4)" class="boxItem"></div>
-        <div onclick="enterTicTacToe(5)" class="boxItem"></div>
+        <div onclick="singlePlayer(3); twoPlayer(3)" class="boxItem"></div>
+        <div onclick="singlePlayer(4); twoPlayer(4)" class="boxItem"></div>
+        <div onclick="singlePlayer(5); twoPlayer(5)" class="boxItem"></div>
       </div>
       <div class="box">
-        <div onclick="enterTicTacToe(6)" class="boxItem"></div>
-        <div onclick="enterTicTacToe(7)" class="boxItem"></div>
-        <div onclick="enterTicTacToe(8)" class="boxItem"></div>
+        <div onclick="singlePlayer(6); twoPlayer(6)" class="boxItem"></div>
+        <div onclick="singlePlayer(7); twoPlayer(7)" class="boxItem"></div>
+        <div onclick="singlePlayer(8); twoPlayer(8)" class="boxItem"></div>
       </div>
 
       <p style="margin-top: 2rem; color:rgb(29, 135, 135); font-size:1.5rem;" id="matchWon"></p>
 
-      <div id="startAgain">
-        <button id="playAgainButton" onclick="startAgain(9)">Play again</button>
+      <div id="playAgain">
+        <button id="playAgainButton" onclick="playAgain(9)">Play again</button>
       </div>
 
       <div class="container">
